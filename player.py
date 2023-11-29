@@ -7,9 +7,9 @@ from childhood import Childhood
 @dataclass(eq=False)
 class Player:
 
+    type: str = ""
     name: str = ""
     age: float = 0
-    text: list = (EventText("You are born", ""),)
 
     # characteristics
     intelligence: int = -10
@@ -20,9 +20,6 @@ class Player:
     communication: int = -10
     dexterity: int = -10
     quickness: int = -10
-
-    def __post_init__(self):
-        self.childhood = Childhood(self)
 
     def change_intelligence(self, change):
         self.intelligence += change
