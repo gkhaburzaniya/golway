@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 import pygame as pg
+import constants
 
 
 @dataclass(eq=False)
@@ -66,6 +67,7 @@ class Player:
             self.creation_step += 1
 
         mouse_x, mouse_y = pg.mouse.get_pos()
+        mouse_x, mouse_y = mouse_x - constants.SURFACE_X, mouse_y - constants.SURFACE_Y
         if pg.mouse.get_pressed()[0] == 1:
             if self.first_button.collidepoint(mouse_x, mouse_y):
                 self.type = "Magus"
