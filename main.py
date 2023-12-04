@@ -1,6 +1,7 @@
 import pygame as pg
 
-from character_creator.creator import create_character
+from player import Player
+
 
 def main():
     pg.init()
@@ -10,15 +11,16 @@ def main():
 
     pg.display.set_caption("Golway")
     surface = pg.Surface((640, 480))
-    character_created = False
+    player = Player()
+    player.started = False
 
     while running:
         for event in pg.event.get():
             if event.type == pg.KEYDOWN and event.key == pg.K_ESCAPE:
                 running = False
 
-        if not character_created:
-            character_created = create_character(surface)
+        if not player.type:
+            player.create_character(surface)
 
         screen.blit(surface, (0, 0))
         pg.display.flip()
