@@ -8,9 +8,6 @@ import constants
 class Player:
 
     creation_step = 0
-    first_button = None
-    second_button = None
-    third_button = None
 
     type: str = ""
     name: str = ""
@@ -31,34 +28,34 @@ class Player:
 
         if self.creation_step == 0:
             magus_text = font.render("Magus", True, "blue")
-            self.first_button = pg.draw.rect(
+            self.magus_button = pg.draw.rect(
                 surface,
                 "dark grey",
                 (0, 30, magus_text.get_width() + 5,
                  magus_text.get_height() + 5),
             )
             magus_text_rect = magus_text.get_rect(
-                center=self.first_button.center)
+                center=self.magus_button.center)
 
             companion_text = font.render("Companion", True, "red")
-            companion_button = pg.draw.rect(
+            self.companion_button = pg.draw.rect(
                 surface,
                 "dark grey",
-                (self.first_button.right + 25, 30,
+                (self.magus_button.right + 25, 30,
                  companion_text.get_width() + 5,
                  companion_text.get_height() + 5),
             )
             companion_text_rect = companion_text.get_rect(
-                center=companion_button.center)
+                center=self.companion_button.center)
 
             grog_text = font.render("Grog", True, "white")
-            grog_button = pg.draw.rect(
+            self.grog_button = pg.draw.rect(
                 surface,
                 "dark grey",
-                (companion_button.right + 25, 30,
+                (self.companion_button.right + 25, 30,
                  grog_text.get_width() + 5, grog_text.get_height() + 5),
             )
-            grog_text_rect = grog_text.get_rect(center=grog_button.center)
+            grog_text_rect = grog_text.get_rect(center=self.grog_button.center)
             surface.blit(font.render("What Kind of Character are You?", True,
                                      "white"), (0, 0))
             surface.blit(magus_text, magus_text_rect)
@@ -69,12 +66,28 @@ class Player:
         mouse_x, mouse_y = pg.mouse.get_pos()
         mouse_x, mouse_y = mouse_x - constants.SURFACE_X, mouse_y - constants.SURFACE_Y
         if pg.mouse.get_pressed()[0] == 1:
-            if self.first_button.collidepoint(mouse_x, mouse_y):
+            if self.magus_button.collidepoint(mouse_x, mouse_y):
                 self.type = "Magus"
 
                 surface.fill("black")
                 surface.blit(
                     font.render("You are a Magus", True, "white"),
+                    (60, 0))
+                return True
+            if self.companion_button.collidepoint(mouse_x, mouse_y):
+                self.type = "Companion"
+
+                surface.fill("black")
+                surface.blit(
+                    font.render("You are a Companion", True, "white"),
+                    (60, 0))
+                return True
+            if self.grog_button.collidepoint(mouse_x, mouse_y):
+                self.type = "Grog"
+
+                surface.fill("black")
+                surface.blit(
+                    font.render("You are a Grog", True, "white"),
                     (60, 0))
                 return True
 
