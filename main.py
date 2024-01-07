@@ -1,6 +1,6 @@
 import pygame as pg
-import constants
 
+import constants
 from player import Player
 
 

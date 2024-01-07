@@ -1,10 +1,8 @@
 from dataclasses import dataclass, field
-from character_creator import steps
 
 from pygame import Rect
 
-import pygame as pg
-import constants
+from character_creator import steps
 
 
 @dataclass(eq=False)
